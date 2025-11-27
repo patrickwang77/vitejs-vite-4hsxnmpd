@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Plus, Trash2, TrendingUp, Settings, RefreshCw, DollarSign, PieChart, Activity, AlertCircle, X, Filter, ArrowUp, ArrowDown, Moon, Sun, Layout, Globe, Coins, History } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { Plus, Trash2, TrendingUp, Settings, RefreshCw, AlertCircle, X, Filter, ArrowUp, ArrowDown, Moon, Sun, History } from 'lucide-react';
 
 // --- 介面定義 ---
 

@@ -554,8 +554,8 @@ export default function StockTrackerApp() {
                           >
                             <div className={`font-bold text-base group-hover:underline transition-colors ${
                               h.market === 'TW'
-                                ? 'text-cyan-400 group-hover:text-cyan-300'
-                                : 'text-blue-400 group-hover:text-blue-300'
+                                ? (isDark ? 'text-cyan-400 group-hover:text-cyan-300' : 'text-cyan-600 group-hover:text-cyan-700')
+                                : (isDark ? 'text-blue-400 group-hover:text-blue-300' : 'text-blue-600 group-hover:text-blue-700')
                             }`}>{h.ticker}</div>
                             <div className={`text-xs ${theme.subText}`}>{h.name}</div>
                           </button>
@@ -564,13 +564,17 @@ export default function StockTrackerApp() {
                           <div className="flex items-center space-x-1">
                              <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${
                                h.market === 'TW'
-                                 ? 'bg-cyan-500/20 text-cyan-300 border-cyan-600'
-                                 : 'bg-blue-500/20 text-blue-300 border-blue-600'
+                                 ? (isDark ? 'bg-cyan-500/20 text-cyan-300 border-cyan-600' : 'bg-cyan-100 text-cyan-700 border-cyan-300')
+                                 : (isDark ? 'bg-blue-500/20 text-blue-300 border-blue-600' : 'bg-blue-100 text-blue-700 border-blue-300')
                              }`}>
                                 {h.market}
                              </span>
                              {h.isETF && (
-                                <span className={`px-2 py-0.5 rounded text-xs font-semibold border bg-amber-500/20 border-amber-600 text-amber-300`}>
+                                <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${
+                                  isDark
+                                    ? 'bg-amber-500/20 border-amber-600 text-amber-300'
+                                    : 'bg-amber-100 border-amber-300 text-amber-700'
+                                }`}>
                                    ETF
                                 </span>
                              )}

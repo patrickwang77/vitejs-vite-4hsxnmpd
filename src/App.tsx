@@ -531,14 +531,14 @@ export default function StockTrackerApp() {
                 <table className="w-full text-sm text-left">
                   <thead className={`${theme.tableHeader} border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
                     <tr>
-                      <th className={`${paddingClass} font-medium`}><button onClick={() => requestSort('ticker')}>代號 {getSortIcon('ticker')}</button></th>
-                      <th className={`${paddingClass} font-medium`}><button onClick={() => requestSort('market')}>市場 {getSortIcon('market')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('shares')}>股數 {getSortIcon('shares')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('avgCost')}>均價 {getSortIcon('avgCost')}</button></th>
+                      <th className={`${paddingClass} font-medium`}><button onClick={() => requestSort('ticker')} className="flex items-center">代號 {getSortIcon('ticker')}</button></th>
+                      <th className={`${paddingClass} font-medium`}><button onClick={() => requestSort('market')} className="flex items-center">市場 {getSortIcon('market')}</button></th>
+                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('shares')} className="flex items-center ml-auto">股數 {getSortIcon('shares')}</button></th>
+                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('avgCost')} className="flex items-center ml-auto">均價 {getSortIcon('avgCost')}</button></th>
                       <th className={`${paddingClass} font-medium text-right w-32 ${theme.yellowBg} border-b`}>現價 (輸入)</th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('marketValue')}>市值 {getSortIcon('marketValue')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('unrealizedPL')}>損益 {getSortIcon('unrealizedPL')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('roi')}>報酬率 {getSortIcon('roi')}</button></th>
+                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('marketValue')} className="flex items-center ml-auto">市值 {getSortIcon('marketValue')}</button></th>
+                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('unrealizedPL')} className="flex items-center ml-auto">損益 {getSortIcon('unrealizedPL')}</button></th>
+                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('roi')} className="flex items-center ml-auto">報酬率 {getSortIcon('roi')}</button></th>
                       <th className={`${paddingClass} font-medium text-center`}>操作</th>
                     </tr>
                   </thead>
@@ -548,21 +548,33 @@ export default function StockTrackerApp() {
                     ) : getSortedData(holdings).map((h) => (
                       <tr key={h.ticker} className={`transition-colors ${theme.tableRowHover}`}>
                         <td className={paddingClass}>
-                          <button 
+                          <button
                             onClick={() => handleTickerClick(h.ticker)}
                             className="text-left group"
                           >
-                            <div className="font-bold group-hover:text-blue-500 group-hover:underline">{h.ticker}</div>
+                            <div className={`font-bold text-base group-hover:underline transition-colors ${
+                              h.market === 'TW'
+                                ? (isDark ? 'text-emerald-400 group-hover:text-emerald-300' : 'text-emerald-700 group-hover:text-emerald-600')
+                                : (isDark ? 'text-sky-400 group-hover:text-sky-300' : 'text-sky-700 group-hover:text-sky-600')
+                            }`}>{h.ticker}</div>
                             <div className={`text-xs ${theme.subText}`}>{h.name}</div>
                           </button>
                         </td>
                         <td className={paddingClass}>
                           <div className="flex items-center space-x-1">
-                             <span className={`px-1.5 py-0.5 rounded text-[10px] border ${h.market === 'TW' ? 'border-green-200 text-green-600' : 'border-blue-200 text-blue-600'}`}>
+                             <span className={`px-2 py-0.5 rounded-md text-xs font-semibold ${
+                               h.market === 'TW'
+                                 ? (isDark ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700' : 'bg-emerald-50 text-emerald-700 border border-emerald-200')
+                                 : (isDark ? 'bg-sky-900/40 text-sky-400 border border-sky-700' : 'bg-sky-50 text-sky-700 border border-sky-200')
+                             }`}>
                                 {h.market}
                              </span>
                              {h.isETF && (
-                                <span className={`px-1.5 py-0.5 rounded text-[10px] border border-purple-200 text-purple-600 bg-purple-50 dark:bg-purple-900/40 dark:border-purple-800 dark:text-purple-300`}>
+                                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border ${
+                                  isDark
+                                    ? 'bg-orange-900/40 border-orange-700 text-orange-400'
+                                    : 'bg-orange-50 border-orange-200 text-orange-700'
+                                }`}>
                                    ETF
                                 </span>
                              )}
@@ -571,8 +583,8 @@ export default function StockTrackerApp() {
                         <td className={`${paddingClass} text-right font-medium`}>{formatNumber(h.shares, h.market === 'US' ? 2 : 0)}</td>
                         <td className={`${paddingClass} text-right ${theme.subText}`}>{formatNumber(h.avgCost, 2)}</td>
                         <td className={`${paddingClass} text-right ${theme.priceInputWrapper}`}>
-                          <input 
-                            type="number" 
+                          <input
+                            type="number"
                             className={`w-20 text-right p-1 border rounded focus:ring-2 focus:ring-red-500 outline-none font-bold shadow-sm ${theme.priceInput}`}
                             value={manualPrices[h.ticker] || ''}
                             placeholder="輸入"
@@ -589,7 +601,7 @@ export default function StockTrackerApp() {
                           </span>
                         </td>
                         <td className={`${paddingClass} text-center`}>
-                          <button 
+                          <button
                             onClick={() => setDeleteTargetTicker(h.ticker)}
                             className={`${theme.buttonSecondary} p-1 transition-colors hover:text-red-500`}
                             title="刪除此檔股票所有紀錄"

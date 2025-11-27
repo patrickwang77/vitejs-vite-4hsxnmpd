@@ -97,7 +97,7 @@ export default function StockTrackerApp() {
 
   // 視覺設定
   const [visualSettings, setVisualSettings] = useState<VisualSettings>({
-    darkMode: false,
+    darkMode: true,
     density: 'normal'
   });
 
@@ -554,8 +554,8 @@ export default function StockTrackerApp() {
                           >
                             <div className={`font-bold text-base group-hover:underline transition-colors ${
                               h.market === 'TW'
-                                ? (isDark ? 'text-teal-400 group-hover:text-teal-300' : 'text-teal-600 group-hover:text-teal-700')
-                                : (isDark ? 'text-blue-400 group-hover:text-blue-300' : 'text-blue-600 group-hover:text-blue-700')
+                                ? 'text-cyan-400 group-hover:text-cyan-300'
+                                : 'text-blue-400 group-hover:text-blue-300'
                             }`}>{h.ticker}</div>
                             <div className={`text-xs ${theme.subText}`}>{h.name}</div>
                           </button>
@@ -564,17 +564,13 @@ export default function StockTrackerApp() {
                           <div className="flex items-center space-x-1">
                              <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${
                                h.market === 'TW'
-                                 ? (isDark ? 'bg-teal-900/20 text-teal-400 border-teal-700' : 'bg-teal-50 text-teal-700 border-teal-200')
-                                 : (isDark ? 'bg-blue-900/20 text-blue-400 border-blue-700' : 'bg-blue-50 text-blue-700 border-blue-200')
+                                 ? 'bg-cyan-500/20 text-cyan-300 border-cyan-600'
+                                 : 'bg-blue-500/20 text-blue-300 border-blue-600'
                              }`}>
                                 {h.market}
                              </span>
                              {h.isETF && (
-                                <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${
-                                  isDark
-                                    ? 'bg-amber-900/20 border-amber-700 text-amber-400'
-                                    : 'bg-amber-50 border-amber-200 text-amber-700'
-                                }`}>
+                                <span className={`px-2 py-0.5 rounded text-xs font-semibold border bg-amber-500/20 border-amber-600 text-amber-300`}>
                                    ETF
                                 </span>
                              )}

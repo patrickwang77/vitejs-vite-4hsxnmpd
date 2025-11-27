@@ -529,17 +529,17 @@ export default function StockTrackerApp() {
               
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left">
-                  <thead className={`${theme.tableHeader} border-b ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+                  <thead className={`${isDark ? 'bg-gray-900 text-gray-500' : 'bg-white text-gray-600'} border-b ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
                     <tr>
-                      <th className={`${paddingClass} font-medium`}><button onClick={() => requestSort('ticker')} className="flex items-center">代號 {getSortIcon('ticker')}</button></th>
-                      <th className={`${paddingClass} font-medium`}><button onClick={() => requestSort('market')} className="flex items-center">市場 {getSortIcon('market')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('shares')} className="flex items-center ml-auto">股數 {getSortIcon('shares')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('avgCost')} className="flex items-center ml-auto">均價 {getSortIcon('avgCost')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right w-32 ${theme.yellowBg} border-b`}>現價 (輸入)</th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('marketValue')} className="flex items-center ml-auto">市值 {getSortIcon('marketValue')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('unrealizedPL')} className="flex items-center ml-auto">損益 {getSortIcon('unrealizedPL')}</button></th>
-                      <th className={`${paddingClass} font-medium text-right`}><button onClick={() => requestSort('roi')} className="flex items-center ml-auto">報酬率 {getSortIcon('roi')}</button></th>
-                      <th className={`${paddingClass} font-medium text-center`}>操作</th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider`}><button onClick={() => requestSort('ticker')} className="flex items-center">代號 {getSortIcon('ticker')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider`}><button onClick={() => requestSort('market')} className="flex items-center">市場 {getSortIcon('market')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-right`}><button onClick={() => requestSort('shares')} className="flex items-center ml-auto">股數 {getSortIcon('shares')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-right`}><button onClick={() => requestSort('avgCost')} className="flex items-center ml-auto">均價 {getSortIcon('avgCost')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-right w-32 ${isDark ? 'bg-yellow-900/20 text-yellow-600 border-yellow-800' : 'bg-yellow-50/60 text-yellow-800 border-yellow-100'} border-b`}>現價 (輸入)</th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-right`}><button onClick={() => requestSort('marketValue')} className="flex items-center ml-auto">市值 {getSortIcon('marketValue')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-right`}><button onClick={() => requestSort('unrealizedPL')} className="flex items-center ml-auto">損益 {getSortIcon('unrealizedPL')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-right`}><button onClick={() => requestSort('roi')} className="flex items-center ml-auto">報酬率 {getSortIcon('roi')}</button></th>
+                      <th className={`${paddingClass} font-semibold text-xs uppercase tracking-wider text-center`}>操作</th>
                     </tr>
                   </thead>
                   <tbody className={`divide-y ${theme.divider}`}>
@@ -554,26 +554,26 @@ export default function StockTrackerApp() {
                           >
                             <div className={`font-bold text-base group-hover:underline transition-colors ${
                               h.market === 'TW'
-                                ? (isDark ? 'text-emerald-400 group-hover:text-emerald-300' : 'text-emerald-700 group-hover:text-emerald-600')
-                                : (isDark ? 'text-sky-400 group-hover:text-sky-300' : 'text-sky-700 group-hover:text-sky-600')
+                                ? (isDark ? 'text-teal-400 group-hover:text-teal-300' : 'text-teal-600 group-hover:text-teal-700')
+                                : (isDark ? 'text-blue-400 group-hover:text-blue-300' : 'text-blue-600 group-hover:text-blue-700')
                             }`}>{h.ticker}</div>
                             <div className={`text-xs ${theme.subText}`}>{h.name}</div>
                           </button>
                         </td>
                         <td className={paddingClass}>
                           <div className="flex items-center space-x-1">
-                             <span className={`px-2 py-0.5 rounded-md text-xs font-semibold ${
+                             <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${
                                h.market === 'TW'
-                                 ? (isDark ? 'bg-emerald-900/40 text-emerald-400 border border-emerald-700' : 'bg-emerald-50 text-emerald-700 border border-emerald-200')
-                                 : (isDark ? 'bg-sky-900/40 text-sky-400 border border-sky-700' : 'bg-sky-50 text-sky-700 border border-sky-200')
+                                 ? (isDark ? 'bg-teal-900/20 text-teal-400 border-teal-700' : 'bg-teal-50 text-teal-700 border-teal-200')
+                                 : (isDark ? 'bg-blue-900/20 text-blue-400 border-blue-700' : 'bg-blue-50 text-blue-700 border-blue-200')
                              }`}>
                                 {h.market}
                              </span>
                              {h.isETF && (
-                                <span className={`px-2 py-0.5 rounded-md text-xs font-semibold border ${
+                                <span className={`px-2 py-0.5 rounded text-xs font-semibold border ${
                                   isDark
-                                    ? 'bg-orange-900/40 border-orange-700 text-orange-400'
-                                    : 'bg-orange-50 border-orange-200 text-orange-700'
+                                    ? 'bg-amber-900/20 border-amber-700 text-amber-400'
+                                    : 'bg-amber-50 border-amber-200 text-amber-700'
                                 }`}>
                                    ETF
                                 </span>
